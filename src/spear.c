@@ -4,6 +4,17 @@ int n;
 int k;
 int A[100000];
 
+int HowMany(int m){
+  int spears = 0;
+  for(int i = 0; i < n; i++){
+    spears = spears + A[i] / m;
+  }
+  return spears;
+}
+
+int p(int m){
+  return HowMany(m) >= k;
+}
 
 int main(){
   int i, lb, ub;
@@ -11,7 +22,17 @@ int main(){
   for(i = 0; i < n; i++){
     scanf("%d", &A[i]);
   }
-
-
+  lb = 0;
+  ub = 1e5;
+  while(ub - lb > 1) {
+    int mid = (lb + ub) / 2;
+    if(p(mid)){
+      lb = mid;
+    }
+    else {
+      ub = mid;
+    }
+  }
+  printf("%d\n", lb);
   return 0;
 }
